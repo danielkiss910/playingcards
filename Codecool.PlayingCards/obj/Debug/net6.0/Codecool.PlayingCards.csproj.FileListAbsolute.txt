@@ -1,0 +1,14 @@
+C:\Users\Kiss Dániel\RiderProjects\Codecool.PlayingCards\Codecool.PlayingCards\obj\Debug\net6.0\Codecool.PlayingCards.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\Kiss Dániel\RiderProjects\Codecool.PlayingCards\Codecool.PlayingCards\obj\Debug\net6.0\Codecool.PlayingCards.AssemblyInfoInputs.cache
+C:\Users\Kiss Dániel\RiderProjects\Codecool.PlayingCards\Codecool.PlayingCards\obj\Debug\net6.0\Codecool.PlayingCards.AssemblyInfo.cs
+C:\Users\Kiss Dániel\RiderProjects\Codecool.PlayingCards\Codecool.PlayingCards\obj\Debug\net6.0\Codecool.PlayingCards.csproj.CoreCompileInputs.cache
+C:\Users\Kiss Dániel\RiderProjects\Codecool.PlayingCards\Codecool.PlayingCards\bin\Debug\net6.0\Codecool.PlayingCards.exe
+C:\Users\Kiss Dániel\RiderProjects\Codecool.PlayingCards\Codecool.PlayingCards\bin\Debug\net6.0\Codecool.PlayingCards.deps.json
+C:\Users\Kiss Dániel\RiderProjects\Codecool.PlayingCards\Codecool.PlayingCards\bin\Debug\net6.0\Codecool.PlayingCards.runtimeconfig.json
+C:\Users\Kiss Dániel\RiderProjects\Codecool.PlayingCards\Codecool.PlayingCards\bin\Debug\net6.0\Codecool.PlayingCards.dll
+C:\Users\Kiss Dániel\RiderProjects\Codecool.PlayingCards\Codecool.PlayingCards\bin\Debug\net6.0\Codecool.PlayingCards.pdb
+C:\Users\Kiss Dániel\RiderProjects\Codecool.PlayingCards\Codecool.PlayingCards\obj\Debug\net6.0\Codecool.PlayingCards.dll
+C:\Users\Kiss Dániel\RiderProjects\Codecool.PlayingCards\Codecool.PlayingCards\obj\Debug\net6.0\refint\Codecool.PlayingCards.dll
+C:\Users\Kiss Dániel\RiderProjects\Codecool.PlayingCards\Codecool.PlayingCards\obj\Debug\net6.0\Codecool.PlayingCards.pdb
+C:\Users\Kiss Dániel\RiderProjects\Codecool.PlayingCards\Codecool.PlayingCards\obj\Debug\net6.0\Codecool.PlayingCards.genruntimeconfig.cache
+C:\Users\Kiss Dániel\RiderProjects\Codecool.PlayingCards\Codecool.PlayingCards\obj\Debug\net6.0\ref\Codecool.PlayingCards.dll
