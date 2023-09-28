@@ -43,65 +43,125 @@ namespace Codecool.PlayingCards.Model // Namespaces are used to organize code in
             return HashCode.Combine(Suit, Symbol);
         }
     }
+    
+    // Deck class
+    public class Deck
+    {
+        private static readonly Random Random = new Random();
+        
+        private readonly List<Card> _cards; // readonly - can assign value to it only once
+        private readonly List<Card> _drawn;
+
+        public int CardCount => _cards.Count;
+
+        public Deck(List<Card> cards)
+        {
+            _cards = cards;
+            _drawn = new List<Card>();
+        }
+
+        public Card? DrawOne()
+        {
+            Card card = _cards[Random.Next(0, _cards.Count - 1)];
+            HandleDraw(card);
+            return card;
+        }
+
+        private void HandleDraw(Card card)
+        {
+            _cards.Remove(card);
+            _drawn.Add(card);
+        }
+
+        public void Reset()
+        {
+            List<Card> current = new List<Card>(_cards);
+            _cards.Clear();
+            _cards.AddRange(current.Concat(_drawn));
+        }
+    }
 }
 
 // General method to generate a deck of cards based on provided parameters
 public class Program
 {
-    private static Card[] GenerateDeck(int count, int[] numbers, string[] symbols, string[] suits)
+    // Main method, entry point of the application
+    public static void Main(string[] args)
     {
-        Card[] deck = new Card[count];
-        int index = 0;
+        Deck frenchDeck = GenerateFrenchDeck();
+        Console.WriteLine($"French deck created. Card count: {frenchDeck.CardCount}");
 
-        foreach (var suit in suits)
-        {
-            AddNumberedCards(deck, numbers, ref index, suit); // Add numbered cards to the deck
-            AddCourtCards(deck, symbols, ref index, suit); // Add court cards to the deck
-        }
+        Card frenchCard = frenchDeck.DrawOne();
+        Console.WriteLine($"{frenchCard} was drawn. Card count: {frenchDeck.CardCount}");
+        
+        frenchDeck.Reset();
+        Console.WriteLine($"Deck has been reset. Card count: {frenchDeck.CardCount}");
+        
+        
+        Deck germanDeck = GenerateGermanDeck();
+        Console.WriteLine($"German deck created. Card count: {germanDeck.CardCount}");
 
-        return deck;
-    }
-    
-    // Method to add numbered cards to the deck
-    private static void AddNumberedCards(Card[] deck, int[] numbers, ref int index, string suit) // add `ref` to avoid index overriding problem
-    {
-        foreach (var number in numbers) // Generate the numbered cards
-        {
-            Card card = new Card(number.ToString(), suit); // Create new card
-            deck[index] = card; // Insert the card in the deck
-            index++; // Increase the index
-        }
-    }
-    
-    // Method to add court cards to the deck (King, Queen etc)
-    private static void AddCourtCards(Card[] deck, string[] symbols, ref int index, string suit)
-    {
-        foreach (var symbol in symbols)
-        {
-            Card card = new Card(symbol, suit); // Same steps as above
-            deck[index] = card;
-            index++;
-        }
+        Card germanCard = germanDeck.DrawOne();
+        Console.WriteLine($"{germanCard} was drawn. Card count: {germanDeck.CardCount}");
+        
+        germanDeck.Reset();
+        Console.WriteLine($"Deck has been reset. Card count: {germanDeck.CardCount}");
+        
+        // Wait for a key press before program exits
+        Console.ReadKey();
     }
     
     // Specific method to generate a standard French deck of 52 cards 
-    private static Card[] GenerateFrenchDeck()
+    private static Deck GenerateFrenchDeck()
     {
         int[] numbers = { 2, 3, 4, 5, 6, 7, 8, 9, 10 };
         string[] symbols = { "Jack", "Queen", "King", "Ace" };
         string[] suits = { "Clubs", "Spades", "Hearts", "Diamonds" };
 
-        return GenerateDeck(52, numbers, symbols, suits);
+        return GenerateDeck(numbers, symbols, suits);
     }
     
     // Specific method to generate a German deck of 32 cards
-    private static Card[] GenerateGermanDeck()
+    private static Deck GenerateGermanDeck()
     {
         int[] numbers = { 7, 8, 9, 10 };
         string[] symbols = { "Unter", "Ober", "King", "Ace" };
         string[] suits = { "Acorns", "Leaves", "Hearts", "Bells" };
 
-        return GenerateDeck(32, numbers, symbols, suits);
+        return GenerateDeck(numbers, symbols, suits);
+    }
+    
+    private static Deck GenerateDeck(int[] numbers, string[] symbols, string[] suits)
+    {
+        List<Card> cards = new List<Card>();
+
+        foreach (var suit in suits)
+        {
+            AddNumberedCards(cards, numbers, suit); // Add numbered cards to the cards
+            AddCourtCards(cards, symbols, suit); // Add court cards to the cards
+        }
+
+        return new Deck(cards);
+    }
+    
+    // Method to add numbered cards to the deck
+    private static void AddNumberedCards(List<Card> cards, int[] numbers, string suit) // add `ref` to avoid index overriding problem
+    {
+        foreach (var number in numbers) // Generate the numbered cards
+        {
+            Card card = new Card(number.ToString(), suit); // Create new card
+            cards.Add(card); // Add card to cards list
+        }
+    }
+    
+    // Method to add court cards to the deck (King, Queen etc)
+    private static void AddCourtCards(List<Card> cards, string[] symbols, string suit)
+    {
+        foreach (var symbol in symbols)
+        {
+            Card card = new Card(symbol, suit); // Same steps as above
+            cards.Add(card);
+        }
     }
     
     // Method to print all cards in the provided deck to the console
@@ -111,26 +171,5 @@ public class Program
         {
             Console.WriteLine($"{i + 1} - {deck[i]}");
         }
-    }
-    
-    // Main method, entry point of the application
-    public static void Main(string[] args)
-    {
-        Card[] frenchDeck = GenerateFrenchDeck();
-        Card[] germanDeck = GenerateGermanDeck();
-        
-        // Print the French deck
-        Console.WriteLine("French deck:");
-        PrintDeck(frenchDeck);
-        Console.WriteLine("----------");
-        
-        Console.WriteLine(Environment.NewLine); // Prints empty line
-        
-        // Print the German deck
-        Console.WriteLine("German deck:");
-        PrintDeck(germanDeck);
-        
-        // Wait for a key press before program exits
-        Console.ReadKey();
     }
 }
