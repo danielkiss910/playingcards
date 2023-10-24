@@ -15,7 +15,7 @@ public class DeckBuilder : IDeckBuilder
 
     public Deck CreateDeck()
     {
-        var cards = _cardGenerator.Generate(_deckDescriptor);
+        var cards = _cardGenerator.Generate(_deckDescriptor).ToList(); // Convert IEnumerable<Card> to List<Card>
         return new Deck(cards);
     }
 }

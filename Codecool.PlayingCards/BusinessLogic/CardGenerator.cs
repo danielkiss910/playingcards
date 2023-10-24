@@ -1,7 +1,7 @@
-using Codecool.PlayingCards.Model;
-using Codecool.PlayingCards.Logging;
-
 namespace Codecool.PlayingCards.BusinessLogic;
+
+using Model;
+using Logging;
 
 public class CardGenerator : ICardGenerator // `:` symbol declares implementation here
 {
@@ -12,30 +12,26 @@ public class CardGenerator : ICardGenerator // `:` symbol declares implementatio
         _logger = logger;
     }
 
-    public List<Card> Generate(DeckDescriptor descriptor)
+    public IEnumerable<Card> Generate(DeckDescriptor descriptor)
     {
-        List<Card> cards = new List<Card>();
-
         foreach (var suit in descriptor.Suits)
         {
             foreach (var number in descriptor.Numbers)
             {
-                AddCards(cards, number.ToString(), suit);
+                yield return CreateCard(number.ToString(), suit);
             }
 
             foreach (var symbol in descriptor.Symbols)
             {
-                AddCards(cards, symbol, suit);
+                yield return CreateCard(symbol, suit);
             }
         }
-
-        return cards;
     }
     
-    private void AddCards(List<Card> cards, string symbol, string suit)
+    private Card CreateCard(string symbol, string suit)
     {
         Card card = new Card(symbol, suit);
         _logger.LogInfo($"Generated card {card}");
-        cards.Add(card);
+        return card;
     }
 }
