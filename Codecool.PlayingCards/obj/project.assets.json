@@ -8,19 +8,19 @@
     "net6.0": []
   },
   "packageFolders": {
-    "C:\\Users\\Kiss Dániel\\.nuget\\packages\\": {}
+    "C:\\Users\\Daniel\\.nuget\\packages\\": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\Kiss Dániel\\RiderProjects\\Codecool.PlayingCards\\Codecool.PlayingCards\\Codecool.PlayingCards.csproj",
+      "projectUniqueName": "C:\\Users\\Daniel\\RiderProjects\\playingcards\\Codecool.PlayingCards\\Codecool.PlayingCards.csproj",
       "projectName": "Codecool.PlayingCards",
-      "projectPath": "C:\\Users\\Kiss Dániel\\RiderProjects\\Codecool.PlayingCards\\Codecool.PlayingCards\\Codecool.PlayingCards.csproj",
-      "packagesPath": "C:\\Users\\Kiss Dániel\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\Kiss Dániel\\RiderProjects\\Codecool.PlayingCards\\Codecool.PlayingCards\\obj\\",
+      "projectPath": "C:\\Users\\Daniel\\RiderProjects\\playingcards\\Codecool.PlayingCards\\Codecool.PlayingCards.csproj",
+      "packagesPath": "C:\\Users\\Daniel\\.nuget\\packages\\",
+      "outputPath": "C:\\Users\\Daniel\\RiderProjects\\playingcards\\Codecool.PlayingCards\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
-        "C:\\Users\\Kiss Dániel\\AppData\\Roaming\\NuGet\\NuGet.Config"
+        "C:\\Users\\Daniel\\AppData\\Roaming\\NuGet\\NuGet.Config"
       ],
       "originalTargetFrameworks": [
         "net6.0"
@@ -57,19 +57,19 @@
         "downloadDependencies": [
           {
             "name": "Microsoft.AspNetCore.App.Ref",
-            "version": "[6.0.22, 6.0.22]"
+            "version": "[6.0.20, 6.0.20]"
           },
           {
             "name": "Microsoft.NETCore.App.Host.win-x64",
-            "version": "[6.0.22, 6.0.22]"
+            "version": "[6.0.20, 6.0.20]"
           },
           {
             "name": "Microsoft.NETCore.App.Ref",
-            "version": "[6.0.22, 6.0.22]"
+            "version": "[6.0.20, 6.0.20]"
           },
           {
             "name": "Microsoft.WindowsDesktop.App.Ref",
-            "version": "[6.0.22, 6.0.22]"
+            "version": "[6.0.20, 6.0.20]"
           }
         ],
         "frameworkReferences": {
@@ -77,7 +77,7 @@
             "privateAssets": "all"
           }
         },
-        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.401\\RuntimeIdentifierGraph.json"
+        "runtimeIdentifierGraphPath": "C:\\Users\\Daniel\\.dotnet\\sdk\\7.0.306\\RuntimeIdentifierGraph.json"
       }
     }
   }
