@@ -9,63 +9,55 @@ public class CardGeneratorTest
 {
     private ILogger _logger;
     private CardGenerator _cardGenerator;
-    private int[] _numbers;
-    private string[] _symbols;
-    private string[] _suits;
-    private DeckDescriptor _deckDescriptor;
-
 
     [SetUp] // Runs before each test
     public void Setup()
     {
-        // Arrange
+        // Arrange common setup
         _logger = new ConsoleLogger();
         _cardGenerator = new CardGenerator(_logger);
-        _numbers = new[] { 2, 3, 4 };
-        _symbols = new[] { "J", "Q", "K" };
-        _suits = new[] { "Hearts, Diamonds" };
-        _deckDescriptor = new DeckDescriptor(_numbers, _symbols, _suits);
-    }
-    
-    
-    [Test]
-    public void GenerateCardsReturnsExpectedNumberOfCards()
-    {
-        // Arrange
-        var expectedCardCount =
-                _numbers.Length * _suits.Length * _symbols.Length;
-        
-        // Act
-        var cards = _cardGenerator.Generate(_deckDescriptor);
-        
-        // Assert
-        Assert.That(cards.Count(), Is.EqualTo(expectedCardCount));
     }
 
-
-    [Test]
-    public void GenerateCardsReturnsAllPossibleCards()
+    private static IEnumerable<TestCaseData> CardGeneratorTestCases
     {
-        // Arrange
-        var expectedCards = _suits.SelectMany(suit =>
-            _numbers.Select(number => new Card(number.ToString(), suit))
-                .Concat(_symbols.Select(symbol => new Card(symbol, suit)))).ToList();
-        
-        // Act
-        var cards = _cardGenerator.Generate(_deckDescriptor).ToList();
-        
-        // Assert
+        get
+        {
+            var numbers = new[] { 2, 3, 4 };
+            var symbols = new[] { "J", "Q", "K" };
+            var suits = new[] { "Hearts", "Diamonds" };
+
+            yield return new TestCaseData(
+                new DeckDescriptor(numbers, symbols, suits),
+                numbers.Length * suits.Length + symbols.Length * suits.Length
+            ).SetName("GenerateCardsReturnsExpectedNumberOfCards_WithDeckDescriptor");
+        }
+    }
+
+    [Test, TestCaseSource(nameof(CardGeneratorTestCases))]
+    public void GenerateCardsReturnsExpectedNumberOfCards(DeckDescriptor descriptor, int expectedCount)
+    {
+        var cards = _cardGenerator.Generate(descriptor);
+        Assert.That(cards.Count(), Is.EqualTo(expectedCount));
+    }
+
+    [TestCase(new[] { 2, 3, 4 }, new[] { "J", "Q", "K" }, new[] { "Hearts", "Diamonds" })]
+    public void GenerateCardsReturnsAllPossibleCards(int[] numbers, string[] symbols, string[] suits)
+    {
+        var descriptor = new DeckDescriptor(numbers, symbols, suits);
+        var expectedCards = suits.SelectMany(suit =>
+            numbers.Select(number => new Card(number.ToString(), suit))
+                .Concat(symbols.Select(symbol => new Card(symbol, suit)))).ToList();
+
+        var cards = _cardGenerator.Generate(descriptor).ToList();
         CollectionAssert.AreEquivalent(expectedCards, cards);
     }
 
-
     [Test]
-    public void GenerateCardsDeckDescriptorIsNullReturnsEmptyList()
+    public void GenerateCardsDeckDescriptorIsNullThrowsException()
     {
-        // Act 
-        var cards = _cardGenerator.Generate(null);
-        
-        // Assert
-        CollectionAssert.IsEmpty(cards);
+        // Act & Assert
+        var exception = Assert.Throws<ArgumentNullException>(() => _cardGenerator.Generate(null));
+        Assert.That(exception.ParamName, Is.EqualTo("descriptor"));
     }
+
 }

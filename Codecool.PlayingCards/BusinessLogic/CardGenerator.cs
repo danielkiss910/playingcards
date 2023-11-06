@@ -14,6 +14,11 @@ public class CardGenerator : ICardGenerator // `:` symbol declares implementatio
 
     public IEnumerable<Card> Generate(DeckDescriptor descriptor)
     {
+        if (descriptor == null)
+        {
+            throw new ArgumentNullException(nameof(descriptor));
+        }
+        
         foreach (var suit in descriptor.Suits)
         {
             foreach (var number in descriptor.Numbers)
